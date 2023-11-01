@@ -20,29 +20,25 @@
                                     <div class="mb-3 row">
                                         <label class="col-sm-6 col-form-label">Informe a data da Devolução</label>
                                         <div class="col-sm-6">
-                                            <input type="date" name="devolvido" class="form-control"
-                                                value="{{ isset($emprestimos['devolvido']) ? $emprestimos['devolvido'] : old('devolvido') }}">
+                                            <input type="date" name="devolvido" class="form-control" required>
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 row">
-                                        <label class="col-sm-6 col-form-label">Livro(s)</label>
-                                        @foreach ($livros as $livro)
-                                            <div class=" col-sm-6">
-                                                <label class="form-check-label">{{ $livro->titulo }}</label>
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                    id="check" name="check">
+                                    <div class="row mb-3">
 
-                                            </div>
-                                            {{-- <div class="col-sm-6">
-                                                <input type="text" name="livro_titulo" class="form-control"
-                                                    value="{{ $livro->titulo }}" readonly>
-                                            </div> --}}
-                                            <div class="col-sm-0">
-                                                <input type="text" name="livro_id" class="form-control"
-                                                    value="{{ $livro->id }}" hidden>
-                                            </div>
-                                        @endforeach
+
+                                            @foreach ($livros as $key=>$livro)
+
+                                                <div class="col-sm-4 form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        value="{{ $livro->id }}" id="livro_id[]" name="livro_id[]">
+                                                    <label class="form-check-label" for="flexCheckIndeterminate">
+                                                        {{ $livro->titulo }}
+                                                    </label>
+                                                    
+                                                </div>
+                                            @endforeach
+
                                     </div>
 
 

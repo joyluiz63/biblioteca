@@ -36,7 +36,7 @@
                                         <select name="livros[]" class="form-control @error('livros.*') is-invalid @enderror"
                                             multiple>
                                             @foreach ($livros as $livro)
-                                                <option value="{{ $livro->id }}"> {{ $livro->id . ' - ' . $livro->titulo }}
+                                                <option value="{{ $livro->id }}"> {{ $livro->titulo }}
                                                 </option>
                                             @endforeach
                                         </select>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Editora;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\DB;
 
 class EditoraController extends Controller
 {
@@ -13,7 +13,9 @@ class EditoraController extends Controller
      */
     public function index()
     {
-        $editoras = Editora::paginate(10);
+        //$editoras = Editora::paginate(10);
+
+        $editoras = DB::table("editoras")->orderBy("nome","asc")->paginate(10);
 
         return view('editoras.index', compact('editoras'));
     }

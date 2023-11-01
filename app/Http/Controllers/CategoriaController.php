@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CategoriaController extends Controller
 {
     public function index()
     {
-        $categorias = Categoria::paginate(10);
+        $categorias = DB::table("categorias")->orderBy("nome","asc")->paginate(10);
 
         return view('categorias.index', compact('categorias'));
     }

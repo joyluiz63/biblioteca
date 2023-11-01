@@ -10,7 +10,7 @@ class Emprestimo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'retirada', 'devolvera', 'devolvido'
+        'user_id', 'retirada', 'devolvera'
     ] ;
 
     public function livros()

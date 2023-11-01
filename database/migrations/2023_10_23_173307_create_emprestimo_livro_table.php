@@ -12,10 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('emprestimo_livro', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('emprestimo_id')->constrained('emprestimos');
             $table->foreignId('livro_id')->constrained('livros');
-            $table->timestamps();
+            $table->date('devolvido')->nullable;
         });
     }
 

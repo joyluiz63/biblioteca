@@ -13,10 +13,11 @@ class EmprestimoController extends Controller
     {
         $emprestimos = DB::table('emprestimos')
         ->join('emprestimo_livro','emprestimos.id','=','emprestimo_livro.emprestimo_id')
-        ->join('livros','emprestimo_livro.livro_id','=','livros.id')
         ->join('users','emprestimos.user_id','=','users.id')
-        ->where('livros.emprestado', '=', 1)
-        ->select('users.name','livros.titulo','emprestimos.id','emprestimos.retirada','emprestimos.devolvera')
+        ->join('livros','emprestimo_livro.livro_id','=','livros.id')
+        //->where('livros.emprestado', '=', 1)
+        ->where('emprestimo_livro.devolvido','=', null)
+        ->select('users.name', 'livros.titulo','emprestimos.id','emprestimos.retirada','emprestimos.devolvera')
         ->orderByRaw('emprestimos.retirada')
         ->paginate(10);
 
@@ -54,7 +55,7 @@ class EmprestimoController extends Controller
             Livro::whereIn('id', $data['livros'])
             ->update(['emprestado' => 1]);
 
-        return redirect()->route('livros.index')
+        return redirect()->route('emprestimos.index')
             ->with('success', 'Registro de emprestimo efetuado com sucesso!');
 
     }
@@ -67,24 +68,24 @@ class EmprestimoController extends Controller
 
         //$livros = Livro::findOrFail($id);
 
-        $editoras = DB::table('editoras')
-        ->join('livros', 'editoras.id', '=', 'livros.editora_id')
-        ->where('livros.id', '=', $id)
-        ->get();
+        // $editoras = DB::table('editoras')
+        // ->join('livros', 'editoras.id', '=', 'livros.editora_id')
+        // ->where('livros.id', '=', $id)
+        // ->get();
 
-        $autors = DB::table('autors')
-        ->rightJoin("autor_livro","autors.id","=","autor_livro.autor_id")
-        ->rightJoin("livros","autor_livro.livro_id","=","livros.id")
-        ->where("livros.id","=", $id)
-        ->get();
+        // $autors = DB::table('autors')
+        // ->rightJoin("autor_livro","autors.id","=","autor_livro.autor_id")
+        // ->rightJoin("livros","autor_livro.livro_id","=","livros.id")
+        // ->where("livros.id","=", $id)
+        // ->get();
 
-        $categorias = DB::table('categorias')
-        ->rightJoin("categoria_livro","categorias.id","=","categoria_livro.categoria_id")
-        ->rightJoin("livros","categoria_livro.livro_id","=","livros.id")
-        ->where("livros.id","=", $id)
-        ->get();
+        // $categorias = DB::table('categorias')
+        // ->rightJoin("categoria_livro","categorias.id","=","categoria_livro.categoria_id")
+        // ->rightJoin("livros","categoria_livro.livro_id","=","livros.id")
+        // ->where("livros.id","=", $id)
+        // ->get();
 
-        return view("livros.show", compact("livros", "editoras","autors", "categorias"));
+        // return view("livros.show", compact("livros", "editoras","autors", "categorias"));
     }
 
     /**
@@ -95,6 +96,8 @@ class EmprestimoController extends Controller
 
         $emprestimos = Emprestimo::findOrFail($id);
         $livros = $emprestimos->livros;
+        //dd($livros);
+        $livros= $livros->whereIn('emprestado', 1);
 
         return view("emprestimos.edit", compact("emprestimos", "livros"));
     }
@@ -103,28 +106,25 @@ class EmprestimoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $livro)
+    public function update(Request $request, string $emprestimo)
     {
         $data = $request->all();
+         //dd($data);
 
-        if (isset($data['devolvido'])) {
-            Livro::where('id', $data['livro_id'])
+        if(isset($data["livro_id"])) {
+            $emprestimo = DB::table("emprestimo_livro")
+            ->whereIn("livro_id", $data["livro_id"])
+            ->update(["devolvido"=> $data['devolvido']]);
+
+            Livro::whereIn('id', $data['livro_id'])
             ->update(['emprestado' => 0]);
 
-            return redirect()->route('livros.index')
+            return redirect()->route('emprestimos.index')
             ->with('success', 'Devolução de Livro efetuada com sucesso!');
-
-        } else{
-            dd('Data nula');
+        } else {
+            return redirect()->route('emprestimos.index')
+            ->with('success', 'Assinale o(s) livro(s) a serem devolvido!');
         }
-
-        //$livro = Livro::findOrFail($livro);
-       // $livro-> update($data);
-
-        // $livro->categorias()->sync($data['categorias']);
-        // $livro->autors()->sync($data['autors']);
-
-
 
     }
 
