@@ -5,7 +5,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        @can('access')
+        {{-- @can('access') --}}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
 
@@ -73,7 +73,7 @@
                         </ul>
                     </div>
                 </li>
-                @endcan
+                {{-- @endcan --}}
 
 
             </ul>

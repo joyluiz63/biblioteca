@@ -33,11 +33,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('editoras', EditoraController::class)->middleware('can:access');
-    Route::resource('autors', AutorController::class);
-    Route::resource('categorias', CategoriaController::class);
-    Route::resource('livros', LivroController::class);
-    Route::resource('emprestimos', EmprestimoController::class);
+    Route::middleware('can:access')->group(function () {
+        Route::resource('editoras', EditoraController::class);
+        Route::resource('autors', AutorController::class);
+        Route::resource('categorias', CategoriaController::class);
+        Route::resource('livros', LivroController::class);
+        Route::resource('emprestimos', EmprestimoController::class);
+    });
 
 });
 

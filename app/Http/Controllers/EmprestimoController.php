@@ -16,10 +16,11 @@ class EmprestimoController extends Controller
         ->join('livros','emprestimo_livro.livro_id','=','livros.id')
         ->join('users','emprestimos.user_id','=','users.id')
         ->where('livros.emprestado', '=', 1)
-        ->orderByDesc('emprestimos.retirada')
+        ->select('users.name','livros.titulo','emprestimos.id','emprestimos.retirada','emprestimos.devolvera')
+        ->orderByRaw('emprestimos.retirada')
         ->paginate(10);
 
-       // dd($emprestimos);
+       //dd($emprestimos);
 
         return view('emprestimos.index', compact('emprestimos'));
     }
@@ -30,7 +31,10 @@ class EmprestimoController extends Controller
     public function create()
     {
         $users = DB::table('users')->orderByRaw('name')->get();
-        $livros = DB::table('livros')->orderByRaw('titulo')->get();
+        $livros = DB::table('livros')
+        ->orderByRaw('titulo')
+        ->where('livros.emprestado', '=', 0)
+        ->get();
 
         return view('emprestimos.create', compact('users','livros'));
     }
@@ -89,13 +93,10 @@ class EmprestimoController extends Controller
     public function edit(string $id)
     {
 
-        // $livro = Livro::findOrFail($id);
+        $emprestimos = Emprestimo::findOrFail($id);
+        $livros = $emprestimos->livros;
 
-        // $editoras = Editora::all(['id', 'nome']);
-        // $autors = Autor::all(['id', 'nome']);
-        // $categorias = Categoria::all(['id', 'nome']);
-
-        return view("livros.edit", compact("livro", "editoras","autors", "categorias"));
+        return view("emprestimos.edit", compact("emprestimos", "livros"));
     }
 
 
@@ -105,7 +106,17 @@ class EmprestimoController extends Controller
     public function update(Request $request, string $livro)
     {
         $data = $request->all();
-        // dd($data);
+
+        if (isset($data['devolvido'])) {
+            Livro::where('id', $data['livro_id'])
+            ->update(['emprestado' => 0]);
+
+            return redirect()->route('livros.index')
+            ->with('success', 'Devolução de Livro efetuada com sucesso!');
+
+        } else{
+            dd('Data nula');
+        }
 
         //$livro = Livro::findOrFail($livro);
        // $livro-> update($data);
@@ -113,8 +124,8 @@ class EmprestimoController extends Controller
         // $livro->categorias()->sync($data['categorias']);
         // $livro->autors()->sync($data['autors']);
 
-        return redirect()->route('livros.index')
-            ->with('success', 'Livro atualizado com sucesso!');
+
+
     }
 
     /**

@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <form action="{{ route('emprestimos.update', ['emprestimo' => $emprestimo['id']]) }}" method="POST">
+    <form action="{{ route('emprestimos.update', ['emprestimo' => $emprestimos['id']]) }}" method="POST">
         @csrf
         @method('PUT')
 
@@ -15,55 +15,57 @@
 
                                 <div class="mb-md-5 mt-md-4 pb-5">
 
-                                    <h2 class="fw-bold mb-2 text-uppercase">Registro de Devolução</h2>
+                                    <h2 class="fw-bold mb-4 text-uppercase">Registro de Devolução</h2>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="text" name="devolvido"
-                                            class="form-control @error('devolvido') is-invalid @enderror"
-                                            value="{{ isset($emprestimos['devolvido']) ? $emprestimos['devolvido'] : old('devolvido') }}">
-                                        @error('devolvido')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-
-                                    <div class="form-outline form-white mb-4">
-                                        <label>Livro(s)</label>
-                                        <select name="livros[]" class="form-control @error('livros.*') is-invalid @enderror"
-                                            multiple>
-                                            @foreach ($livros as $livro)
-                                                <option value="{{ $livro->id }}">
-                                                    {{ $livro->id . ' - ' . $livro->titulo }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('livros.*')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-6 col-form-label">Informe a data da Devolução</label>
+                                        <div class="col-sm-6">
+                                            <input type="date" name="devolvido" class="form-control"
+                                                value="{{ isset($emprestimos['devolvido']) ? $emprestimos['devolvido'] : old('devolvido') }}">
+                                        </div>
                                     </div>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="date" name="retirada"
-                                            class="form-control @error('retirada') is-invalid @enderror"
-                                            value="{{ old('retirada') }}">
-                                        @error('retirada')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-6 col-form-label">Livro(s)</label>
+                                        @foreach ($livros as $livro)
+                                            <div class=" col-sm-6">
+                                                <label class="form-check-label">{{ $livro->titulo }}</label>
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    id="check" name="check">
+
                                             </div>
-                                        @enderror
-                                        <label class="form-label">Data da Retirada:</label>
+                                            {{-- <div class="col-sm-6">
+                                                <input type="text" name="livro_titulo" class="form-control"
+                                                    value="{{ $livro->titulo }}" readonly>
+                                            </div> --}}
+                                            <div class="col-sm-0">
+                                                <input type="text" name="livro_id" class="form-control"
+                                                    value="{{ $livro->id }}" hidden>
+                                            </div>
+                                        @endforeach
                                     </div>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="date" name="devolvera"
-                                            class="form-control"
-                                            value="{{ $emprestimos['devolvera'] }}" disabled>
-                                        <label class="form-label">Data da Devolução:</label>
+
+
+
+
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-6 col-form-label">Retirado em</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="retirada" class="form-control"
+                                                value="{{ date('d-m-Y', strtotime($emprestimos->retirada)) }}" readonly>
+                                        </div>
                                     </div>
 
-                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Cadastrar</button>
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-6 col-form-label">Prazo estipulado</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" name="devolvera" class="form-control"
+                                                value="{{ date('d-m-Y', strtotime($emprestimos->devolvera)) }}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <button class="btn btn-outline-light btn-lg px-5" type="submit">Registrar</button>
 
                                 </div>
                             </div>
