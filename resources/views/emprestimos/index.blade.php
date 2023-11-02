@@ -15,8 +15,8 @@
                 <tr>
                     <td>{{ $emprestimo->name }}</td>
                     <td>{{ $emprestimo->titulo }}</td>
-                    <td>{{ $emprestimo->retirada }}</td>
-                    <td>{{ $emprestimo->devolvera }}</td>
+                    <td>{{ date('d-m-Y', strtotime($emprestimo->retirada)) }}</td>
+                    <td>{{ date('d-m-Y', strtotime($emprestimo->devolvera)) }}</td>
                     <td>
                         <div class="btn-group">
                             <a href="{{ route('emprestimos.edit', $emprestimo->id) }}" class="btn btn-sm btn-secondary">DEVOLVER</a>

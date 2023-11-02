@@ -6,6 +6,7 @@ use App\Models\Emprestimo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Livro;
+use App\Models\User;
 
 class EmprestimoController extends Controller
 {
@@ -97,9 +98,15 @@ class EmprestimoController extends Controller
         $emprestimos = Emprestimo::findOrFail($id);
         $livros = $emprestimos->livros;
         //dd($livros);
-        $livros= $livros->whereIn('emprestado', 1);
+        $livros= DB::table('livros')
+        ->join('emprestimo_livro','livros.id','=','emprestimo_livro.livro_id')
+        ->where('emprestimo_livro.emprestimo_id','=', $id)
+        ->where('emprestimo_livro.devolvido', '=', null)
+        ->get();
 
-        return view("emprestimos.edit", compact("emprestimos", "livros"));
+        $user = User::findOrfail($emprestimos->user_id);
+
+        return view("emprestimos.edit", compact("emprestimos", "livros", "user"));
     }
 
 

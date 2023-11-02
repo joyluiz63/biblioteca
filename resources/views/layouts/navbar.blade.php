@@ -5,7 +5,7 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        {{-- @can('access') --}}
+        @can('access')
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
 
@@ -73,7 +73,7 @@
                         </ul>
                     </div>
                 </li>
-                {{-- @endcan --}}
+                @endcan
 
 
             </ul>
@@ -87,7 +87,8 @@
                                 {{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Editar Perfil</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Editar Credenciais</a></li>
+                                <li><a class="dropdown-item" href="{{ route('profile.index') }}">Ver Usuarios</a></li>
                                 <li><a class="dropdown-item" href="#"
                                         onclick="document.querySelector('form.logout').submit();">Sair</a>
                                     <form action="{{ route('logout') }}" class="logout" method="POST"

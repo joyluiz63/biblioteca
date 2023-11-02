@@ -15,9 +15,10 @@ class LivroController extends Controller
     {
         $livros = DB::table('livros')
         ->join('editoras','livros.editora_id','=','editoras.id')
+        ->select('livros.id as id', 'livros.titulo', 'editoras.nome', 'livros.emprestado'  )
         ->orderByRaw('titulo')
         ->paginate(10);
-// dd($livros);
+
         return view('livros.index', compact('livros'));
     }
 

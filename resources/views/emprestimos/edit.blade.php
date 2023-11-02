@@ -7,15 +7,16 @@
         @method('PUT')
 
         <section class="vh-50 gradient-custom">
-            <div class="container py-5">
+            <div class="container">
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-12 col-md-8 col-lg-6 col-xl-10">
                         <div class="card bg-dark text-white" style="border-radius: 1rem;">
                             <div class="card-body p-5 text-center">
 
                                 <div class="mb-md-5 mt-md-4 pb-5">
+                                    <h2 class="fw-bold mb-4 text-uppercase">Registro de Devolução do Usuário:
+                                        {{ $user->name }}</h2>
 
-                                    <h2 class="fw-bold mb-4 text-uppercase">Registro de Devolução</h2>
 
                                     <div class="mb-3 row">
                                         <label class="col-sm-6 col-form-label">Informe a data da Devolução</label>
@@ -24,26 +25,22 @@
                                         </div>
                                     </div>
 
-                                    <div class="row mb-3">
-
-
-                                            @foreach ($livros as $key=>$livro)
-
-                                                <div class="col-sm-4 form-check">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        value="{{ $livro->id }}" id="livro_id[]" name="livro_id[]">
-                                                    <label class="form-check-label" for="flexCheckIndeterminate">
-                                                        {{ $livro->titulo }}
-                                                    </label>
-                                                    
+                                    <div class="mb-3 row">
+                                        <label class="col-sm-6 col-form-label">Marque o(s) Livro(s)</label>
+                                        <div class="col-sm-6">
+                                            @foreach ($livros as $key => $livro)
+                                                <div class="row mb-3 d-flex justify-end">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            value="{{ $livro->id }}" id="livro_id[]" name="livro_id[]">
+                                                        <label class="form-check-label" for="flexCheckIndeterminate">
+                                                            {{ $livro->titulo }}
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             @endforeach
-
+                                        </div>
                                     </div>
-
-
-
-
 
                                     <div class="mb-3 row">
                                         <label class="col-sm-6 col-form-label">Retirado em</label>

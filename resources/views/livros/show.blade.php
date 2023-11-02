@@ -22,7 +22,18 @@
                                 <div class="bg-white text-black">
                                     <label class="fw-bold">Autor(es): </label>
                                     @foreach ($autors as $autor)
+                                        @if($autor->espirito == 0)
                                         <td>- {{ $autor->nome }}</td>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                                <div class="bg-white text-black">
+                                    <label class="fw-bold">Autor(es) Espiritual(ais): </label>
+                                    @foreach ($autors as $autor)
+                                    @if($autor->espirito == 1)
+                                    <td>- {{ $autor->nome }}</td>
+                                    @endif
                                     @endforeach
                                 </div>
 
@@ -34,10 +45,10 @@
                                 </div>
 
                                 <div class=" row mt-4">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
                                         <a href="{{ route('livros.edit', $livros->id) }}" class="btn btn-primary">EDITAR</a>
                                     </div>
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
                                         <form action="{{ route('livros.destroy', $livros->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
@@ -45,6 +56,12 @@
                                                 onclick="return confirm('Tem certeza que deseja excluir o registro?')">
                                                 EXCLUIR
                                             </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <form>
+                                            <input type="button" class="btn btn-secondary active" value="VOLTAR"
+                                                onClick="history.go(-1)">
                                         </form>
                                     </div>
                                 </div>
