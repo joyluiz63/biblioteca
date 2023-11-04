@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
             $table->boolean('socio')->default(false);
+            $table->decimal('valor',10,2)->nullable;
             $table->string('nome');
             $table->date('nascimento')->nullable();
             $table->string('cpf')->nullable();

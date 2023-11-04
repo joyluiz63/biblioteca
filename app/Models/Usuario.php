@@ -27,4 +27,8 @@ class Usuario extends Model
     {
         return $this->hasMany(Emprestimo::class);
     }
+
+    public function mensalidades(){
+        return $this->hasMany(Mensalidade::class);
+    }
 }

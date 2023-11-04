@@ -14,3 +14,17 @@
 
 1 USER          tem n EMPRESTIMO    HASMANY
 1 EMPRESTIMO    tem 1 USER          BELONGSTO
+
+
+Um "Sócio" pode ter várias "Mensalidades".
+
+A chave estrangeira ID do Sócio na tabela "Mensalidades" estabelece esse relacionamento. Cada mensalidade está associada a um único sócio.
+Cada "Mensalidade" está associada a um "Sócio".
+
+A chave estrangeira ID da Mensalidade na tabela "Mensalidades" faz referência ao ID do sócio que a possui.
+Um "Sócio" pode efetuar vários "Pagamentos".
+
+A chave estrangeira ID do Sócio na tabela "Pagamentos" estabelece esse relacionamento. Cada pagamento está associado a um único sócio.
+Cada "Pagamento" está relacionado a uma "Mensalidade".
+
+A chave estrangeira ID da Mensalidade na tabela "Pagamentos" faz referência ao ID da mensalidade relacionada a esse pagamento.
