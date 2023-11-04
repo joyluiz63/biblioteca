@@ -6,7 +6,7 @@ use App\Models\Emprestimo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Livro;
-use App\Models\User;
+use App\Models\Usuario;
 
 class EmprestimoController extends Controller
 {
@@ -14,11 +14,11 @@ class EmprestimoController extends Controller
     {
         $emprestimos = DB::table('emprestimos')
         ->join('emprestimo_livro','emprestimos.id','=','emprestimo_livro.emprestimo_id')
-        ->join('users','emprestimos.user_id','=','users.id')
+        ->join('usuarios','emprestimos.usuario_id','=','usuarios.id')
         ->join('livros','emprestimo_livro.livro_id','=','livros.id')
         //->where('livros.emprestado', '=', 1)
         ->where('emprestimo_livro.devolvido','=', null)
-        ->select('users.name', 'livros.titulo','emprestimos.id','emprestimos.retirada','emprestimos.devolvera')
+        ->select('usuarios.nome', 'livros.titulo','emprestimos.id','emprestimos.retirada','emprestimos.devolvera')
         ->orderByRaw('emprestimos.retirada')
         ->paginate(10);
 
@@ -32,13 +32,13 @@ class EmprestimoController extends Controller
      */
     public function create()
     {
-        $users = DB::table('users')->orderByRaw('name')->get();
+        $usuarios = DB::table('usuarios')->orderByRaw('nome')->get();
         $livros = DB::table('livros')
         ->orderByRaw('titulo')
         ->where('livros.emprestado', '=', 0)
         ->get();
 
-        return view('emprestimos.create', compact('users','livros'));
+        return view('emprestimos.create', compact('usuarios','livros'));
     }
 
     /**
@@ -60,41 +60,11 @@ class EmprestimoController extends Controller
             ->with('success', 'Registro de emprestimo efetuado com sucesso!');
 
     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-
-        //$livros = Livro::findOrFail($id);
-
-        // $editoras = DB::table('editoras')
-        // ->join('livros', 'editoras.id', '=', 'livros.editora_id')
-        // ->where('livros.id', '=', $id)
-        // ->get();
-
-        // $autors = DB::table('autors')
-        // ->rightJoin("autor_livro","autors.id","=","autor_livro.autor_id")
-        // ->rightJoin("livros","autor_livro.livro_id","=","livros.id")
-        // ->where("livros.id","=", $id)
-        // ->get();
-
-        // $categorias = DB::table('categorias')
-        // ->rightJoin("categoria_livro","categorias.id","=","categoria_livro.categoria_id")
-        // ->rightJoin("livros","categoria_livro.livro_id","=","livros.id")
-        // ->where("livros.id","=", $id)
-        // ->get();
-
-        // return view("livros.show", compact("livros", "editoras","autors", "categorias"));
-    }
-
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-
         $emprestimos = Emprestimo::findOrFail($id);
         $livros = $emprestimos->livros;
         //dd($livros);
@@ -104,12 +74,10 @@ class EmprestimoController extends Controller
         ->where('emprestimo_livro.devolvido', '=', null)
         ->get();
 
-        $user = User::findOrfail($emprestimos->user_id);
+        $usuario = Usuario::findOrfail($emprestimos->usuario_id);
 
-        return view("emprestimos.edit", compact("emprestimos", "livros", "user"));
+        return view("emprestimos.edit", compact("emprestimos", "livros", "usuario"));
     }
-
-
     /**
      * Update the specified resource in storage.
      */
@@ -135,14 +103,4 @@ class EmprestimoController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    // public function destroy(Livro $livro)
-    // {
-    //     $livro->delete();
-
-    //     return redirect()->route('livros.index')
-    //     ->with('success', 'Livro excluida com sucesso!');
-    // }
 }

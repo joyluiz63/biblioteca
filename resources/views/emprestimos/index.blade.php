@@ -13,7 +13,7 @@
         <tbody>
             @foreach ($emprestimos as $emprestimo)
                 <tr>
-                    <td>{{ $emprestimo->name }}</td>
+                    <td>{{ $emprestimo->nome }}</td>
                     <td>{{ $emprestimo->titulo }}</td>
                     <td>{{ date('d-m-Y', strtotime($emprestimo->retirada)) }}</td>
                     <td>{{ date('d-m-Y', strtotime($emprestimo->devolvera)) }}</td>

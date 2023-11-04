@@ -18,13 +18,13 @@
 
                                     <div class="form-outline form-white mb-4">
                                         <label>Usuario</label>
-                                        <select name="user_id" class="form-control @error('users') is-invalid @enderror">
+                                        <select name="usuario_id" class="form-control @error('usuarios') is-invalid @enderror">
                                             <option selected>Selecione o Usuário</option>
-                                            @foreach ($users as $user)
-                                                <option value="{{ $user->id }}"> {{ $user->name }} </option>
+                                            @foreach ($usuarios as $usuario)
+                                                <option value="{{ $usuario->id }}"> {{ $usuario->nome }} </option>
                                             @endforeach
                                         </select>
-                                        @error('users')
+                                        @error('usuarios')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -48,7 +48,7 @@
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
-                                        <input type="date" name="retirada"
+                                        <input type="date" name="retirada" required
                                             class="form-control @error('retirada') is-invalid @enderror"
                                             value="{{ old('retirada') }}">
                                         @error('retirada')
@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="form-outline form-white mb-4">
-                                        <input type="date" name="devolvera"
+                                        <input type="date" name="devolvera" required
                                             class="form-control @error('devolvera') is-invalid @enderror"
                                             value="{{ old('devolvera') }}">
                                         @error('devolvera')

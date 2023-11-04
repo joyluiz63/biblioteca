@@ -19,28 +19,25 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
-    <div class="bg-dark">
-        <div class="container">
-            @include('layouts.navbar')
-            <div class="text-light">
-                <hr>
-            </div>
+<body class="bg-dark">
 
-            <div class="py-6">
+    <div class="container">
+        @include('layouts.navbar')
 
-                {{-- EXIBIR MENSAGEM SE HOUVER --}}
-                @if (session('success'))
-                    <div class="bg-warning-subtle mb-2 text-center">
-                        <p>{{ session('success') }}</p>
-                        {{-- @else
+
+        <div class="py-6">
+
+            {{-- EXIBIR MENSAGEM SE HOUVER --}}
+            @if (session('success'))
+                <div class="bg-warning-subtle mb-2 text-center">
+                    <p>{{ session('success') }}</p>
+                    {{-- @else
             <p>Teste de Mensagem</p> --}}
-                    </div>
-                @endif
+                </div>
+            @endif
 
-                @yield('content')
+            @yield('content')
 
-            </div>
         </div>
     </div>
 

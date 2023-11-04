@@ -59,10 +59,4 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function index()
-    {
-        $users = DB::table("users")->orderBy("name","asc")->paginate(10);
-
-        return view('profile.index', compact('users'));
-    }
 }

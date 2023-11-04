@@ -71,20 +71,6 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-check">
-                                        <label class="mx-4">Emprestado</label>
-                                        <div class="form-check form-check-inline mb-4">
-                                            <input class="form-check-input" type="checkbox" id="emprestado"
-                                                name="emprestado" value="0" checked>
-                                            <label class="form-check-label" for="emprestado">Não</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="emprestado"
-                                            name="emprestado" value="1">
-                                            <label class="form-check-label" for="emprestado">Sim</label>
-                                        </div>
-                                    </div>
-
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Cadastrar</button>
 
                                 </div>

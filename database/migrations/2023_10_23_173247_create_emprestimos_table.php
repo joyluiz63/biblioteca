@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('emprestimos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('usuario_id')->constrained('usuarios');
             $table->date('retirada');
             $table->date('devolvera');
             $table->timestamps();

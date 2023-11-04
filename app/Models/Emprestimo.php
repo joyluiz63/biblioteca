@@ -10,7 +10,7 @@ class Emprestimo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'retirada', 'devolvera'
+        'usuario_id', 'retirada', 'devolvera'
     ] ;
 
     public function livros()
@@ -18,8 +18,8 @@ class Emprestimo extends Model
         return $this->belongsToMany(Livro::class);
     }
 
-    public function users()
+    public function usuarios()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Usuario::class);
     }
 }

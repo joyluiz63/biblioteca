@@ -9,14 +9,14 @@
             <th>Ações</th>
         </thead>
         <tbody>
-            @foreach ($users as $user)
+            @foreach ($usuarios as $usuario)
                 <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->fone }}</td>
+                    <td>{{ $usuario->nome }}</td>
+                    <td>{{ $usuario->fone }}</td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{-- {{ route('users.edit', $user->id) }} --}}" class="btn btn-sm btn-secondary">EDITAR</a>
-                            {{-- <form action="{{ route('users.destroy', $user->id) }}" method="post">
+                            <a href="{{-- {{ route('usuarios.edit', $usuario->id) }} --}}" class="btn btn-sm btn-secondary">EDITAR</a>
+                            {{-- <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger active"
@@ -30,5 +30,5 @@
             @endforeach
         </tbody>
     </table>
-    {{ $users->links() }}
+    {{ $usuarios->links() }}
 @endsection

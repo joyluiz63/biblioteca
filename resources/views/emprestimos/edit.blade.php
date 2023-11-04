@@ -15,7 +15,7 @@
 
                                 <div class="mb-md-5 mt-md-4 pb-5">
                                     <h2 class="fw-bold mb-4 text-uppercase">Registro de Devolução do Usuário:
-                                        {{ $user->name }}</h2>
+                                        {{ $usuario->nome }}</h2>
 
 
                                     <div class="mb-3 row">

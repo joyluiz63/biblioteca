@@ -24,9 +24,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::define("access", function (User $user) {
-            //return $user->hasRole("admin");
-            return $user->access_level == "admin";
-        });
+        //
     }
 }
