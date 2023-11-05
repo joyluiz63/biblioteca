@@ -75,9 +75,15 @@ class EditoraController extends Controller
      */
     public function destroy(Editora $editora)
     {
-        $editora->delete();
+        try {
+            $editora->delete();
+            return redirect()->route('editoras.index')
+            ->with('success', 'Editora excluida com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->route('editoras.index')
+            ->with('success', 'A editora não pode ser excluida, pois pertence ao registro de livros');
+        }
 
-        return redirect()->route('editoras.index')
-        ->with('success', 'Editora excluida com sucesso!');
+
     }
 }

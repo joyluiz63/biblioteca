@@ -10,7 +10,7 @@
             <h1 class="text-center">ATUALIZAÇÃO DE CATEGORIA</h1>
             <div class="col-sm-12 mb-3 text-center">
                 <label for="nome">Categoria</label>
-                <input type="text" class="form-control" name="nome" value="{{ isset($categoria->nome) ? $categoria->nome : old('nome') }}">>
+                <input type="text" class="form-control" name="nome" value="{{ isset($categoria->nome) ? $categoria->nome : old('nome') }}">
             </div>
 
             <div class="flex justify-center">

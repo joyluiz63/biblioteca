@@ -70,10 +70,15 @@ class AutorController extends Controller
      */
     public function destroy(Autor $autor)
     {
-        $autor->delete();
+        try {
+            $autor->delete();
 
-        return redirect()->route('autors.index')
-        ->with('success', 'Autor excluido com sucesso!');
+            return redirect()->route('autors.index')
+            ->with('success', 'Autor excluido com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->route('autors.index')
+            ->with('success', 'O Autor não pode ser excluido, pois pertence ao registro de livros');
+        }
     }
 }
 

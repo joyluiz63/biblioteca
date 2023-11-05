@@ -45,10 +45,10 @@
                                 </div>
 
                                 <div class=" row mt-4">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <a href="{{ route('livros.edit', $livros->id) }}" class="btn btn-primary">EDITAR</a>
                                     </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    {{-- <div class="col-sm-4 mb-3 mb-sm-0">
                                         <form action="{{ route('livros.destroy', $livros->id) }}" method="post">
                                             @csrf
                                             @method('DELETE')
@@ -57,8 +57,8 @@
                                                 EXCLUIR
                                             </button>
                                         </form>
-                                    </div>
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    </div> --}}
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <form>
                                             <input type="button" class="btn btn-secondary active" value="VOLTAR"
                                                 onClick="history.go(-1)">

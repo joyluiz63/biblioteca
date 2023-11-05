@@ -70,9 +70,14 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        $categoria->delete();
+        try {
+            $categoria->delete();
 
-        return redirect()->route('categorias.index')
-        ->with('success', 'Categoria excluida com sucesso!');
+            return redirect()->route('categorias.index')
+            ->with('success', 'Categoria excluido com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->route('categorias.index')
+            ->with('success', 'A Categoria não pode ser excluida, pois pertence ao registro de livros');
+        }
     }
 }

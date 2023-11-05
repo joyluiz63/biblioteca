@@ -1,0 +1,37 @@
+No Laravel, você pode agendar a execução de comandos usando a ferramenta de agendamento do Cron. O agendamento do Cron permite que você execute comandos automaticamente em intervalos regulares, como diariamente, semanalmente ou mensalmente. Para agendar a execução do comando que criamos anteriormente para gerar mensalidades mensalmente, siga as etapas abaixo:
+
+Abra o arquivo app/Console/Kernel.php. Este arquivo contém a definição das tarefas agendadas da sua aplicação.
+
+Adicione uma nova tarefa agendada ao método schedule no arquivo Kernel.php. Para agendar a execução mensal do comando gerar:mensalidades, você pode usar o método monthly. Aqui está um exemplo de como fazer isso:
+
+php
+Copy code
+// app/Console/Kernel.php
+
+protected function schedule(Schedule $schedule)
+{
+    $schedule->command('gerar:mensalidades')->monthly();
+}
+Neste exemplo, o método monthly agendará a execução do comando gerar:mensalidades para ocorrer mensalmente. Você pode personalizar a hora, o dia do mês e outros detalhes conforme necessário. Por exemplo:
+
+php
+Copy code
+$schedule->command('gerar:mensalidades')
+    ->monthly()
+    ->on(1, '00:00');
+Isso agendará a execução mensalmente no primeiro dia do mês às 00:00.
+
+Para ativar o agendamento do Cron, você precisa adicionar uma entrada no Cron no seu servidor. Abra o Crontab usando o comando:
+bash
+Copy code
+crontab -e
+Adicione uma linha para agendar a execução das tarefas agendadas do Laravel. O comando que você precisa adicionar pode variar dependendo do seu ambiente e configuração. Um exemplo geral seria:
+bash
+Copy code
+* * * * * php /caminho/para/o/seu/projeto/artisan schedule:run >> /dev/null 2>&1
+Essa linha agendará a execução do agendador do Laravel a cada minuto. O agendador verificará se há tarefas a serem executadas no momento especificado.
+
+Salve e saia do editor de texto do Crontab.
+Agora, o comando gerar:mensalidades será agendado para ser executado mensalmente, conforme a programação que você definiu no arquivo Kernel.php. Certifique-se de que o servidor onde seu aplicativo Laravel está hospedado esteja configurado para executar o Cron regularmente.
+
+Observe que o comando acima é apenas um exemplo, e você pode personalizar o agendamento de acordo com suas necessidades específicas. Certifique-se de adaptar o agendamento de acordo com a frequência desejada e a hora de execução ideal para suas mensalidades.

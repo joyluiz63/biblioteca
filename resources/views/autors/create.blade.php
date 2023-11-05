@@ -7,10 +7,10 @@
 
         <div class="bg-light w-50 p-2 mt-6 container-fluid justify-center border border-dark">
             <h1 class="text-center">CADASTRO DE AUTOR</h1>
-            
+
             <div class="col-sm-12 mb-3 text-center">
                 <label for="nome">Autor</label>
-                <input type="text" class="form-control" name="nome">
+                <input type="text" class="form-control" name="nome" required>
             </div>
 
             <div class="form-check">

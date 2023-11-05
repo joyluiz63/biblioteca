@@ -21,6 +21,8 @@ class Usuario extends Model
         'cidade',
         'fone',
         'email',
+        'socio',
+        'valor',
     ];
 
     public function emprestimos()
