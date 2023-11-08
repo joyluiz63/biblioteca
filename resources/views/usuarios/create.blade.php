@@ -66,7 +66,7 @@
 
             <div class="row w-50 justify-center">
                 <div class="col-sm-2 mb-2 text-center form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" name="socio">
+                    <input class="form-check-input" type="checkbox" value="1" role="switch" name="socio">
                     <label for="socio">Sócio</label>
                 </div>
 

@@ -9,9 +9,16 @@ use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = DB::table("usuarios")->orderBy("nome","asc")->paginate(10);
+        $data = $request->search;
+        if ($data) {
+            $usuarios = DB::table("usuarios")
+            ->where("nome","like", "%".$data."%")
+            ->paginate(10);
+        } else {
+            $usuarios = DB::table("usuarios")->orderBy("nome","asc")->paginate(10);
+        }
 
         return view('usuarios.index', compact('usuarios'));
     }
@@ -41,7 +48,19 @@ class UsuarioController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $usuarios = DB::table('usuarios')
+            ->join('emprestimos','usuarios.id','=','emprestimos.usuario_id')
+            ->join('emprestimo_livro','emprestimos.id','=','emprestimo_livro.emprestimo_id')
+            ->join('livros','emprestimo_livro.livro_id','=','livros.id')
+            ->where('usuarios.id','=', $id)
+            ->select('usuarios.nome','livros.*', 'emprestimos.id as emprestimo_id' ,'emprestimos.retirada', 'emprestimos.devolvera', 'emprestimo_livro.devolvido')
+            ->paginate(10);
+            //dd($usuarios);
+
+            $nome = Usuario::findOrFail($id);
+            $nome = $nome->nome;
+
+            return view('usuarios.show', compact('usuarios', 'nome'));
     }
 
     /**
@@ -57,6 +76,8 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
+        if (!$request['socio']) $request['socio'] = 0;
+
         $usuario->update($request->all());
 
         return redirect()->route('usuarios.index')

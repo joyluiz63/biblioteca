@@ -21,7 +21,7 @@
 
                 <div class="col-sm-3 mb-3 text-center">
                     <label for="cpf">CPF</label>
-                    <input type="text" class="form-control" name="cpf" value="{{ isset($usuario->cpf) ? $usuario->cpf : old('cpf') }}">
+                    <input type="text" class="form-control" id="cpf" name="cpf" value="{{ isset($usuario->cpf) ? $usuario->cpf : old('cpf') }}">
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-sm-6 mb-3 text-center">
                     <label for="fone">Telefone(s)</label>
-                    <input type="text" class="form-control" name="fone" value="{{ isset($usuario->fone) ? $usuario->nome : old('fone') }}">
+                    <input type="text" class="form-control" id="fone" name="fone" value="{{ isset($usuario->fone) ? $usuario->nome : old('fone') }}">
                 </div>
 
                 <div class="col-sm-6 mb-4 text-center">
@@ -66,15 +66,15 @@
                 </div>
             </div>
 
-            <div class="row w-50 justify-center">
-                <div class="col-sm-2 mb-2 text-center form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" name="socio" value="{{ isset($usuario->socio) ? $usuario->socio : old('socio') }}">
+            <div class="row  justify-end">
+                <div class="col-sm-2 mb-2 text-center form-check">
+                    <input class="form-check-input" type="checkbox" role="switch" name="socio" value="1" @if($usuario->socio) checked @endif>
                     <label for="socio">Sócio</label>
                 </div>
 
                 <div class="col-sm-4 mb-3 text-center">
                     <label for="valor">Valor da Mensalidade</label>
-                    <input type="text" class="form-control" name="valor" value="{{ isset($usuario->valor) ? $usuario->valor : old('valor') }}">
+                    <input type="text" class="form-control" id="valor" name="valor" value="{{ isset($usuario->valor) ? $usuario->valor : old('valor') }}">
                 </div>
             </div>
 

@@ -2,6 +2,18 @@
 
 @section('content')
 
+<div class="mb-2">
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+            <p>Busca por Usuário<p>
+          <form action="{{ route('usuarios.index') }}" method="GET" class="d-flex" role="search">
+            <input class="form-control me-2" type="search" name="search" aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Busca</button>
+          </form>
+        </div>
+      </nav>
+</div>
+
     <table class="table  table-striped">
         <thead>
             <th>Usuário</th>
@@ -19,6 +31,7 @@
                     <td>{{ $usuario->socio == 1 ? 'Sim' : '' }}</td>
                     <td>
                         <div class="btn-group">
+                            <a href="{{ route('usuarios.show', $usuario->id) }}" class="btn btn-sm btn-secondary me-2">VER</a>
                             <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-sm btn-secondary">EDITAR</a>
                             {{-- <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
                                 @csrf

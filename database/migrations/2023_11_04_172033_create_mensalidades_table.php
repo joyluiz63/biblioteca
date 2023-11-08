@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('mensalidades', function (Blueprint $table) {
             $table->id();
             $table->foreignId('usuario_id')->constrained('usuarios');
-            $table->date('vencimento');
-            $table->decimal('valor',10,2);
+            $table->string('mes_referencia');
             $table->boolean('status')->default(0);
             $table->timestamps();
         });

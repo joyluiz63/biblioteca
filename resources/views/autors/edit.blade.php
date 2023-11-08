@@ -13,6 +13,20 @@
                 <input type="text" class="form-control" name="nome" value="{{ isset($autor->nome) ? $autor->nome : old('nome') }}">
             </div>
 
+            <div class="form-check">
+                <label class="mx-4">Autor Espiritual</label>
+                <div class="form-check form-check-inline mb-4">
+                    <input class="form-check-input" type="radio" id="espirito"
+                        name="espirito" value="0" {{ old('espirito', $autor->espirito) == 0 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="espirito">Não</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="espirito"
+                    name="espirito" value="1" {{ old('espirito', $autor->espirito) == 1 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="espirito">Sim</label>
+                </div>
+            </div>
+
             <div class="flex justify-center">
                 <button class="btn btn-secondary active px-5" type="submit">CADASTRAR</button>
             </div>

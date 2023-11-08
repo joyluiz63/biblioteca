@@ -3,8 +3,10 @@
 use App\Http\Controllers\AutorController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\EditoraController;
+use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\EmprestimoController;
 use App\Http\Controllers\LivroController;
+use App\Http\Controllers\MensalidadeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('livros', LivroController::class);
     Route::resource('emprestimos', EmprestimoController::class);
     Route::resource('usuarios', UsuarioController::class);
+    Route::resource('mensalidades', MensalidadeController::class);
+
+    Route::get('mensalidades.geraMensalidades', [MensalidadeController::class,'geraMensalidades'])->name('mensalidades.geraMensalidades');
+    Route::post('/receber-pagamento', [PagamentoController::class, 'receberPagamento'])->name('receber_pagamento');
+
 
 
 });

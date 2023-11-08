@@ -78,6 +78,20 @@
                     <div class="dropdown mx-1">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
+                            Sócios
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('mensalidades.index') }}">Ver mensalidades</a></li>
+                            <li><a class="dropdown-item" href="{{ route('mensalidades.geraMensalidades') }}">Gerar Mensalidades</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <div class="dropdown mx-1">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Usuarios
                         </button>
                         <ul class="dropdown-menu">

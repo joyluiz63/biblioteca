@@ -11,7 +11,7 @@ class Mensalidade extends Model
 
     protected $fillable = [
         "usuario_id",
-        "vencimento",
+        "mes_referencia",
         "valor",
         "status",
     ];
