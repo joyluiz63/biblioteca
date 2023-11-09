@@ -20,17 +20,18 @@
                     <td>{{ $usuario->nome }}</td>
                     <td>{{ $usuario->mes_referencia }} </td>
                     <td>{{ $usuario->valor }} </td>
-                    <td> @if ($usuario->data != null) {{date('d-m-Y', strtotime($usuario->data))}}
+                    <td> @if ($usuario->data != null) {{date('d-m-Y', strtotime($usuario->data))}} </td><td>
                          @else PENDENTE
-                         @endif</td>
+                    </td>
                     <td>
                         <div class="btn-group">
                             <a href="{{ route('mensalidades.edit', $usuario->usuario_id) }}" class="btn btn-sm btn-secondary me-2">RECEBER</a>
                         </div>
+                        @endif</td>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $usuarios->links() }}
+    <div class="bg-secondary">{{ $usuarios->links() }}</div>
 @endsection

@@ -2,13 +2,12 @@
 
 @section('content')
 
-<div class="mb-2">
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <p>Busca por Usuário<p>
+<div class="container-fluid">
+    <nav class="navbar">
+            <p></p>
           <form action="{{ route('usuarios.index') }}" method="GET" class="d-flex" role="search">
             <input class="form-control me-2" type="search" name="search" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Busca</button>
+            <button class="btn btn-outline-primary active" type="submit">Busca</button>
           </form>
         </div>
       </nav>

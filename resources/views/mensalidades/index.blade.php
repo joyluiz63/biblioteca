@@ -2,13 +2,12 @@
 
 @section('content')
 
-<div class="mb-2">
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <p>Busca por Sócio<p>
+<div class="container-fluid">
+    <nav class="navbar">
+            <p></p>
           <form action="{{ route('mensalidades.index') }}" method="GET" class="d-flex" role="search">
-            <input class="form-control me-2" type="search" name="search" aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit">Busca</button>
+            <input class="form-input me-2" type="search" name="search" aria-label="Search">
+            <button class="btn btn-outline-primary active" type="submit">Busca</button>
           </form>
         </div>
       </nav>
@@ -16,29 +15,23 @@
 
     <table class="table  table-striped">
         <thead>
-            <th>ID</th>
             <th>Socio</th>
-            <th>vencimento</th>
-            <th>Valor</th>
-            <th>Pago</th>
+            <th>Valor Acordado</th>
             <th>Ações</th>
         </thead>
         <tbody>
-            @foreach ($mensalidades as $mensalidade)
+            @foreach ($socios as $socio)
                 <tr>
-                    <td>{{ $mensalidade->id }}</td>
-                    <td>{{ $mensalidade->nome }}</td>
-                    <td>{{ $mensalidade->mes_referencia }}</td>
-                    <td>R$ {{ $mensalidade->valor }} </td>
-                    <td>{{ $mensalidade->status == 0 ? 'Pendente' : 'Sim' }}</td>
+                    <td>{{ $socio->nome }}</td>
+                    <td>R$ {{ $socio->valor }} </td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{ route('mensalidades.show', $mensalidade->id) }}" class="btn btn-sm btn-secondary">VER</a>
+                            <a href="{{ route('mensalidades.show', $socio->id) }}" class="btn btn-sm btn-secondary">VER MENSALIDADES</a>
                         </div>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $mensalidades->links() }}
+    {{ $socios->links() }}
 @endsection

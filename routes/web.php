@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('mensalidades', MensalidadeController::class);
 
-    Route::get('mensalidades.geraMensalidades', [MensalidadeController::class,'geraMensalidades'])->name('mensalidades.geraMensalidades');
+    Route::post('mensalidades.geraMensalidades', [MensalidadeController::class,'geraMensalidades'])->name('mensalidades.geraMensalidades');
     Route::post('/receber-pagamento', [PagamentoController::class, 'receberPagamento'])->name('receber_pagamento');
 
 

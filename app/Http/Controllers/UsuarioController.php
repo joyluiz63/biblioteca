@@ -6,6 +6,7 @@ use App\Http\Requests\UsuarioRequest;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class UsuarioController extends Controller
 {
@@ -33,10 +34,16 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
+        if (!$request['socio']) {
+            $request['socio'] = 0;
+        } else if (!$request['valor']){
+            // return redirect()->route('usuarios.index')
+            // ->with('success', 'Se o usuario é sócio, o valor da mensalidade precisa ser informado');
+            return Redirect::back()->withInput()
+            ->with('success', 'Se o usuario é sócio, o valor da mensalidade precisa ser informado');
+        }
 
-        $usuario = Usuario::create($data);
-
+        $usuario = Usuario::create($request->all());
 
         return redirect()->route('usuarios.index')
             ->with('success', 'Usuario registrado com sucesso!');
@@ -76,12 +83,20 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, Usuario $usuario)
     {
-        if (!$request['socio']) $request['socio'] = 0;
+        if (!$request['socio']) {
+            $request['socio'] = 0;
+        } else if (!$request['valor']){
+            // return redirect()->route('usuarios.index')
+            // ->with('success', 'Se o usuario é sócio, o valor da mensalidade precisa ser informado');
+            return Redirect::back()->withInput()
+            ->with('success', 'Se o usuario é sócio, o valor da mensalidade precisa ser informado');
+        }
 
         $usuario->update($request->all());
 
         return redirect()->route('usuarios.index')
             ->with('success', 'Usuario atualizado com sucesso!');
+
     }
 
     /**

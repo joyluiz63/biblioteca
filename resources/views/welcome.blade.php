@@ -36,11 +36,9 @@
 
                 <div class="max-w-7xl mx-auto p-6 lg:p-8">
                     <a href="#">
-                        <img class="rounded mx-auto d-block" src="{{ asset('img/cefl.jpg') }}" style="width: 40rem;">
+                        <img class="rounded mx-auto d-block" src="{{ asset('img/cefonteluz.jpg') }}" style="width: 40rem;">
                     </a>
                 </div>
-
-
             </div>
         </div>
     </body>

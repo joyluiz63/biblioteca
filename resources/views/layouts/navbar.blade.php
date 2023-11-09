@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('dashboard') }}">HOME</a>
+        <a class="navbar-brand" href="{{ route('dashboard') }}">
+            <img class="rounded mx-auto d-block" src="{{ asset('img/fonteluz.jpg') }}" style="width: 6rem;">
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -81,8 +83,8 @@
                             Sócios
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('mensalidades.index') }}">Ver mensalidades</a></li>
-                            <li><a class="dropdown-item" href="{{ route('mensalidades.geraMensalidades') }}">Gerar Mensalidades</a></li>
+                            <li><a class="dropdown-item" href="{{ route('mensalidades.index') }}">Visualizar</a></li>
+                            <li><a class="dropdown-item" href="{{ route('mensalidades.create') }}">Gerar Mensalidades</a></li>
 
                         </ul>
                     </div>

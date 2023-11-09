@@ -14,21 +14,18 @@ class MensalidadeController extends Controller
     {
         $data = $request->search;
         if ($data) {
-            $mensalidades = DB::table("mensalidades")
-            ->join("usuarios","mensalidades.usuario_id","=","usuarios.id")
-            ->select("mensalidades.*", "usuarios.nome", "usuarios.id", "usuarios.valor")
-            ->where("usuarios.nome","like", "%".$data."%")
-            ->paginate(10);
 
-        } else {
-            $mensalidades = DB::table("mensalidades")
-            ->join("usuarios","mensalidades.usuario_id","=","usuarios.id")
-            ->select("mensalidades.*", "usuarios.nome", "usuarios.id", "usuarios.valor")
+            $socios = DB::table("usuarios")
+            ->where("usuarios.socio","=", "1")
+            ->where("usuarios.nome","like", "%".$data."%")
+            ->paginate(10);} else {
+
+            $socios = DB::table("usuarios")
+            ->where("usuarios.socio","=", "1")
             ->paginate(10);
         }
 
-
-        return view("mensalidades.index", compact("mensalidades"));
+        return view("mensalidades.index", compact("socios"));
     }
 
     public function show(string $id)
@@ -38,7 +35,8 @@ class MensalidadeController extends Controller
             ->leftJoin('pagamentos','mensalidades.id','=','pagamentos.mensalidade_id')
             ->where('mensalidades.usuario_id','=', $id)
             ->select('usuarios.id as usuario_id', 'usuarios.nome','mensalidades.mes_referencia', 'pagamentos.valor' ,'pagamentos.pagamento as data')
-            ->paginate(10);
+            ->orderBy('mensalidades.mes_referencia','desc')
+            ->paginate(5);
 
             $nome = Usuario::findOrFail($id);
             $nome = $nome->nome;
@@ -89,18 +87,33 @@ class MensalidadeController extends Controller
 
     }
 
-
-    public function geraMensalidades()
+    public function create()
     {
+        return view('mensalidades.create');
+    }
+
+    public function geraMensalidades(Request $request)
+    {
+        $data = $request->all();
         $socios = DB::table('usuarios')
         ->where('socio', '=', 1)
         ->get();
+
+        $mes = date('m');
+        $ano = date('Y');
+
+        if ($data["ano"]) {
+           $ano = $data["ano"];
+        }
+        if ($data["mes"]) {
+           $mes = $data["mes"];
+        }
+        $mesReferencia = date($ano.'-'.$mes); // Formato 'AAAA-MM'
 
         $contador = 0;
 
         foreach ($socios as $socio) {
             // Verificar se já existe uma mensalidade para o mês atual
-            $mesReferencia = date('Y-m'); // Formato 'AAAA-MM'
             $mensalidadeExistente = Mensalidade::where('usuario_id', $socio->id)
                 ->where('mes_referencia', $mesReferencia)
                 ->first();
@@ -116,7 +129,7 @@ class MensalidadeController extends Controller
         }
         if($contador > 0) {
         return redirect()->route('mensalidades.index')
-        ->with('success', 'Mensalidades do mes atual geradas com sucesso para '.$contador .' sócio(s)!');
+        ->with('success', 'Mensalidades do mes '.$mesReferencia.' geradas com sucesso para '.$contador .' sócio(s)!');
         } else {
             return redirect()->route('mensalidades.index')
         ->with('success', 'Nenhuma mensalidade gerada!');

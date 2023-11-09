@@ -38,7 +38,7 @@
                                                         <input type="text" name="mensalidade[{{$key}}][id]" value="{{ $usuario->mensalidade_id}}" hidden>
                                                         <td>{{ $usuario->mes_referencia }} </td>
                                                         <td>R$ {{ $usuario->valor }} </td>
-                                                        <td><input type="text" name="mensalidade[{{$key}}][valor]" {{-- value="{{ isset($usuario->valor) ? $usuario->valor : old('valor') }}" --}}> </td>
+                                                        <td><input type="number" step="0.01" min="0.01" name="mensalidade[{{$key}}][valor]" {{-- value="{{ isset($usuario->valor) ? $usuario->valor : old('valor') }}" --}}> </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

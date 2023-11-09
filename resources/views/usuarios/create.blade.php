@@ -9,70 +9,70 @@
             <div class="row">
                 <div class="col-sm-7 mb-3 text-center">
                     <label for="nome">*Nome</label>
-                    <input type="text" class="form-control" name="nome" required>
+                    <input type="text" class="form-control" name="nome" value="{{ old('nome') }}" required>
                 </div>
 
                 <div class="col-sm-2 mb-3 text-center">
                     <label for="nascimento">Data de Nascimento</label>
-                    <input type="date" class="form-control" name="nascimento">
+                    <input type="date" class="form-control" name="nascimento" value="{{ old('nascimento') }}">
                 </div>
 
                 <div class="col-sm-3 mb-3 text-center">
                     <label for="cpf">CPF</label>
-                    <input type="text" autocomplete="off" maxlength="14"  class="form-control" id="cpf" name="cpf">
+                    <input type="text" autocomplete="off" maxlength="14"  class="form-control" id="cpf" name="cpf" value="{{ old('cpf') }}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-6 mb-3 text-center">
                     <label for="rua">Rua</label>
-                    <input type="text" class="form-control" name="rua">
+                    <input type="text" class="form-control" name="rua" value="{{ old('rua') }}">
                 </div>
 
                 <div class="col-sm-2 mb-3 text-center">
                     <label for="numero">Número</label>
-                    <input type="text" class="form-control" name="numero">
+                    <input type="text" class="form-control" name="numero" value="{{ old('numero') }}">
                 </div>
 
                 <div class="col-sm-4 mb-3 text-center">
                     <label for="complemento">Complemento</label>
-                    <input type="text" class="form-control" name="complemento">
+                    <input type="text" class="form-control" name="complemento" value="{{ old('complemento') }}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-6 mb-3 text-center">
                     <label for="bairro">Bairro</label>
-                    <input type="text" class="form-control" name="bairro">
+                    <input type="text" class="form-control" name="bairro" value="{{ old('bairro') }}">
                 </div>
 
                 <div class="col-sm-6 mb-3 text-center">
                     <label for="cidade">Cidade</label>
-                    <input type="text" class="form-control" name="cidade">
+                    <input type="text" class="form-control" name="cidade" value="{{ old('cidade') }}">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-6 mb-3 text-center">
                     <label for="fone">Telefone(s)</label>
-                    <input type="text" autocomplete="off" class="form-control" id="fone" name="fone">
+                    <input type="text" autocomplete="off" class="form-control" id="fone" name="fone" value="{{ old('fone') }}">
                 </div>
 
                 <div class="col-sm-6 mb-4 text-center">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email">
+                    <input type="email" class="form-control" name="email" value="{{ old('email') }}">
                 </div>
             </div>
 
             <div class="row w-50 justify-center">
                 <div class="col-sm-2 mb-2 text-center form-check form-switch">
-                    <input class="form-check-input" type="checkbox" value="1" role="switch" name="socio">
+                    <input class="form-check-input" type="checkbox" value="1" role="switch" name="socio" id="socio">
                     <label for="socio">Sócio</label>
                 </div>
 
                 <div class="col-sm-4 mb-3 text-center">
                     <label for="valor">Valor da Mensalidade</label>
-                    <input type="text" class="form-control" name="valor" id="valor">
+                    <input type="text" class="form-control" name="valor" id="valor" value="{{ old('valor') }}">
                 </div>
             </div>
 
