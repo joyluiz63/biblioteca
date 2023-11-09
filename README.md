@@ -1,5 +1,10 @@
-# biblioteca - PROJETO AINDA EM CONTRUUÇÃO 
-Controle de empréstimo de Livros para Centro Espírita com Php / Laravel 10
-Antes de utilizar, executar no terminal, na pasta raiz do projeto o comando: composer install
-DATA: 01/11/2023 -> Controle de biblioteca, com devidos cadastros prontos para teste
+# ADMINISTRAÇÃO DE CENTRO ESPÍRITA 
+Programa criado para auxiliar na administração de um centro espírita, contruido com o framework Laraver versão 10.
+Funcionalidades: Cadastro de Livros, usuarios, sócios e controle de emprestimos de livros, bem como de mensalidades dos sócios.
 
+    git clone 
+    cd sua-aplicacao
+    composer install
+    cp .env.example .env
+    php artisan key:generate
+    php artisan migrate
