@@ -15,7 +15,7 @@ class EditoraController extends Controller
     {
         //$editoras = Editora::paginate(10);
 
-        $editoras = DB::table("editoras")->orderBy("nome","asc")->paginate(10);
+        $editoras = DB::table("editoras")->orderBy("nome","asc")->paginate(7);
 
         return view('editoras.index', compact('editoras'));
     }

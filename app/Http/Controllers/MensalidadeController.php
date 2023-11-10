@@ -18,11 +18,11 @@ class MensalidadeController extends Controller
             $socios = DB::table("usuarios")
             ->where("usuarios.socio","=", "1")
             ->where("usuarios.nome","like", "%".$data."%")
-            ->paginate(10);} else {
+            ->paginate(7);} else {
 
             $socios = DB::table("usuarios")
             ->where("usuarios.socio","=", "1")
-            ->paginate(10);
+            ->paginate(7);
         }
 
         return view("mensalidades.index", compact("socios"));

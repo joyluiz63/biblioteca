@@ -11,14 +11,22 @@ use Illuminate\Support\Facades\DB;
 
 class LivroController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $livros = DB::table('livros')
-        ->join('editoras','livros.editora_id','=','editoras.id')
-        ->select('livros.id as id', 'livros.titulo', 'editoras.nome', 'livros.emprestado'  )
-        ->orderByRaw('titulo')
-        ->paginate(10);
-
+        $data = $request->search;
+        if($data) {
+            $livros = DB::table('livros')
+            ->join('editoras','livros.editora_id','=','editoras.id')
+            ->select('livros.id as id', 'livros.titulo', 'editoras.nome', 'livros.emprestado'  )
+            ->where("titulo","like", "%".$data."%")
+            ->paginate(7);
+        } else {
+            $livros = DB::table('livros')
+            ->join('editoras','livros.editora_id','=','editoras.id')
+            ->select('livros.id as id', 'livros.titulo', 'editoras.nome', 'livros.emprestado'  )
+            ->orderByRaw('titulo')
+            ->paginate(7);
+        }
         return view('livros.index', compact('livros'));
     }
 
@@ -28,10 +36,11 @@ class LivroController extends Controller
     public function create()
     {
         $categorias = DB::table('categorias')->orderByRaw('nome')->get();
-        $autors = DB::table('autors')->orderByRaw('nome')->get();
+        $autors1 = DB::table('autors')->orderByRaw('nome')->where('espirito', '=', '0') ->get();
+        $autors2 = DB::table('autors')->orderByRaw('nome')->where('espirito', '=', '1') ->get();
         $editoras = DB::table('editoras')->orderByRaw('nome')->get();
 
-        return view('livros.create', compact('categorias','autors','editoras'));
+        return view('livros.create', compact('categorias','autors1','autors2','editoras'));
     }
 
     /**
@@ -40,10 +49,8 @@ class LivroController extends Controller
     public function store(Request $request)
     {
         $data  = $request->all();
-        $livro = $request->except(['autors', 'categorias']);
-        // $categoria = $request->only(['categorias']);
-        // $autor = $request->only(['autors']);
 
+        $livro = $request->except(['autors', 'categorias']);
 
         $livro = Livro::create($livro);
         $livro->categorias()->sync($data['categorias']);
@@ -122,9 +129,14 @@ class LivroController extends Controller
      */
     public function destroy(Livro $livro)
     {
-        $livro->delete();
+        try {
+            $livro->delete();
 
-        return redirect()->route('livros.index')
-        ->with('success', 'Livro excluida com sucesso!');
+            return redirect()->route('livros.index')
+            ->with('success', 'Livro excluido com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->route('livros.index')
+            ->with('success', 'O livro não pode ser excluido, pois pertence ao registro de emprestimos');
+        }
     }
 }

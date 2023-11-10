@@ -33,5 +33,7 @@
             @endforeach
         </tbody>
     </table>
-    <div class="bg-secondary">{{ $usuarios->links() }}</div>
+    <div class="bg-white  px-2">
+        {{ $usuarios->links() }}
+    </div>
 @endsection

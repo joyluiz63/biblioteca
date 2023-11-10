@@ -1,7 +1,9 @@
 @extends('layouts.master')
 
 @section('content')
-
+<div class="d-inline-flex p-2 bg-body-dark text-white">
+    <p class="h5"><a href="{{ route('autors.index') }}">Autores</a></p>
+</div>
     <table class="table  table-striped">
         <thead>
             <th>Autor</th>
@@ -16,7 +18,7 @@
                         {{$autor->espirito == 0 ? 'Não' : 'Sim'}}</td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{ route('autors.edit', $autor->id) }}" class="btn btn-sm btn-secondary">EDITAR</a>
+                            <a href="{{ route('autors.edit', $autor->id) }}" class="btn btn-sm btn-secondary me-2">EDITAR</a>
                             <form action="{{ route('autors.destroy', $autor->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
@@ -31,5 +33,7 @@
             @endforeach
         </tbody>
     </table>
-    {{ $autors->links() }}
+    <div class="bg-white px-2">
+        {{ $autors->links() }}
+    </div>
 @endsection

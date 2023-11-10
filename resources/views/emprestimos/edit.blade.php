@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
-
 @section('content')
+    <div class="d-inline-flex p-2 bg-body-dark text-white">
+        <p class="h6"><a href="{{ route('emprestimos.index') }}">Emprestimos</a> ->Devolução</p>
+    </div>
+
     <form action="{{ route('emprestimos.update', ['emprestimo' => $emprestimos['id']]) }}" method="POST">
         @csrf
         @method('PUT')

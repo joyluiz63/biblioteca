@@ -10,20 +10,6 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto">
-
-                <li class="nav-item dropdown">
-                    <div class="dropdown mx-1">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Editoras
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('editoras.index') }}">Ver</a></li>
-                            <li><a class="dropdown-item" href="{{ route('editoras.create') }}">Cadastrar</a></li>
-                        </ul>
-                    </div>
-                </li>
-
                 <li class="nav-item dropdown">
                     <div class="dropdown mx-1">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -31,7 +17,7 @@
                             Autores
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('autors.index') }}">Ver</a></li>
+                            <li><a class="dropdown-item" href="{{ route('autors.index') }}">Visualizar</a></li>
                             <li><a class="dropdown-item" href="{{ route('autors.create') }}">Cadastrar</a></li>
                         </ul>
                     </div>
@@ -44,7 +30,7 @@
                             Categoria
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('categorias.index') }}">Ver</a></li>
+                            <li><a class="dropdown-item" href="{{ route('categorias.index') }}">Visualizar</a></li>
                             <li><a class="dropdown-item" href="{{ route('categorias.create') }}">Cadastrar</a></li>
                         </ul>
                     </div>
@@ -54,11 +40,11 @@
                     <div class="dropdown mx-1">
                         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Emprestimos
+                            Editoras
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('emprestimos.index') }}">Ver</a></li>
-                            <li><a class="dropdown-item" href="{{ route('emprestimos.create') }}">Cadastrar</a></li>
+                            <li><a class="dropdown-item" href="{{ route('editoras.index') }}">Visualizar</a></li>
+                            <li><a class="dropdown-item" href="{{ route('editoras.create') }}">Cadastrar</a></li>
                         </ul>
                     </div>
                 </li>
@@ -70,8 +56,34 @@
                             Livros
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('livros.index') }}">Ver</a></li>
+                            <li><a class="dropdown-item" href="{{ route('livros.index') }}">Visualizar</a></li>
                             <li><a class="dropdown-item" href="{{ route('livros.create') }}">Cadastrar</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <div class="dropdown mx-1">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Emprestimos
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('emprestimos.index') }}">Visualizar</a></li>
+                            <li><a class="dropdown-item" href="{{ route('emprestimos.create') }}">Cadastrar</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <div class="dropdown mx-1">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Usuarios
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('usuarios.index') }}">Visualizar</a></li>
+                            <li><a class="dropdown-item" href="{{ route('usuarios.create') }}">Cadastrar</a></li>
                         </ul>
                     </div>
                 </li>
@@ -89,20 +101,6 @@
                         </ul>
                     </div>
                 </li>
-
-                <li class="nav-item dropdown">
-                    <div class="dropdown mx-1">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Usuarios
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('usuarios.index') }}">Ver</a></li>
-                            <li><a class="dropdown-item" href="{{ route('usuarios.create') }}">Cadastrar</a></li>
-                        </ul>
-                    </div>
-                </li>
-
 
             </ul>
 

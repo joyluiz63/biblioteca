@@ -10,7 +10,7 @@ class AutorController extends Controller
 {
     public function index()
     {
-        $autors = DB::table('autors')->orderByRaw('nome') ->paginate(10);
+        $autors = DB::table('autors')->orderByRaw('nome') ->paginate(7);
 
         return view('autors.index', compact('autors'));
     }

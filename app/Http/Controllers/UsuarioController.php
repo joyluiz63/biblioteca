@@ -16,9 +16,9 @@ class UsuarioController extends Controller
         if ($data) {
             $usuarios = DB::table("usuarios")
             ->where("nome","like", "%".$data."%")
-            ->paginate(10);
+            ->paginate(7);
         } else {
-            $usuarios = DB::table("usuarios")->orderBy("nome","asc")->paginate(10);
+            $usuarios = DB::table("usuarios")->orderBy("nome","asc")->paginate(7);
         }
 
         return view('usuarios.index', compact('usuarios'));
@@ -37,8 +37,6 @@ class UsuarioController extends Controller
         if (!$request['socio']) {
             $request['socio'] = 0;
         } else if (!$request['valor']){
-            // return redirect()->route('usuarios.index')
-            // ->with('success', 'Se o usuario é sócio, o valor da mensalidade precisa ser informado');
             return Redirect::back()->withInput()
             ->with('success', 'Se o usuario é sócio, o valor da mensalidade precisa ser informado');
         }

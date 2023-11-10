@@ -16,11 +16,10 @@ class EmprestimoController extends Controller
         ->join('emprestimo_livro','emprestimos.id','=','emprestimo_livro.emprestimo_id')
         ->join('usuarios','emprestimos.usuario_id','=','usuarios.id')
         ->join('livros','emprestimo_livro.livro_id','=','livros.id')
-        //->where('livros.emprestado', '=', 1)
         ->where('emprestimo_livro.devolvido','=', null)
         ->select('usuarios.nome', 'livros.titulo','emprestimos.id','emprestimos.retirada','emprestimos.devolvera')
         ->orderByRaw('emprestimos.retirada')
-        ->paginate(10);
+        ->paginate(7);
 
        //dd($emprestimos);
 

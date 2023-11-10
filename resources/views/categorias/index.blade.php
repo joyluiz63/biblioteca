@@ -2,6 +2,10 @@
 
 @section('content')
 
+    <div class="d-inline-flex p-2 bg-body-dark text-white">
+        <p class="h5"><a href="{{ route('categorias.index') }}">Categorias</a></p>
+    </div>
+
     <table class="table  table-striped">
         <thead>
             <th>Categoria</th>
@@ -13,7 +17,7 @@
                     <td>{{ $categoria->nome }}</td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-sm btn-secondary">EDITAR</a>
+                            <a href="{{ route('categorias.edit', $categoria->id) }}" class="btn btn-sm btn-secondary me-2">EDITAR</a>
                             <form action="{{ route('categorias.destroy', $categoria->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
@@ -28,5 +32,7 @@
             @endforeach
         </tbody>
     </table>
-    {{ $categorias->links() }}
+    <div class="bg-white px-2">
+        {{ $categorias->links() }}
+    </div>
 @endsection

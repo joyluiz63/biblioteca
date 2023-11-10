@@ -1,11 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
+    <div class="d-inline-flex p-2 bg-body-dark text-white">
+        <p class="h6"><a href="{{ route('usuarios.index') }}">Usuarios</a>->Histórico</p>
+    </div>
 
-<div class="container bg-info-subtle mb-1 text-center">
-    <p class="h3 text-center">{{ $nome }}<p>
-    <p class="h5 text-center">Biblioteca -> Histórico</p>
-</div>
+    <div class="container bg-info-subtle mb-1 text-center">
+        <p class="h3 text-center">{{ $nome }}
+        <p>
+        <p class="h5 text-center">Biblioteca -> Histórico</p>
+    </div>
     <table class="table  table-striped">
         <thead>
             <th>Livro</th>
@@ -16,19 +20,28 @@
         </thead>
         <tbody>
             @foreach ($usuarios as $usuario)
-            @if($usuario->devolvido == null) <tr class="table-danger"> @else <tr> @endif
-                    <td>{{ $usuario->titulo }}</td>
-                    <td>{{ date('d-m-Y', strtotime($usuario->retirada)) }} </td>
-                    <td>{{ date('d-m-Y', strtotime($usuario->devolvera)) }} </td>
+                @if ($usuario->devolvido == null)
+                    <tr class="table-danger">
+                    @else
+                    <tr>
+                @endif
+                <td>{{ $usuario->titulo }}</td>
+                <td>{{ date('d-m-Y', strtotime($usuario->retirada)) }} </td>
+                <td>{{ date('d-m-Y', strtotime($usuario->devolvera)) }} </td>
 
-                    <td> @if ($usuario->devolvido != null) {{date('d-m-Y', strtotime($usuario->devolvido))}}
-                         @else PENDENTE
-                         @endif</td>
-                    <td>
-                        <div class="btn-group">
-                            <a href="{{ route('emprestimos.edit', $usuario->emprestimo_id) }}" class="btn btn-sm btn-secondary me-2">DEVOLUÇÃO</a>
+                <td>
+                    @if ($usuario->devolvido != null)
+                        {{ date('d-m-Y', strtotime($usuario->devolvido)) }}
+                    @else
+                        PENDENTE
+                    @endif
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{{ route('emprestimos.edit', $usuario->emprestimo_id) }}"
+                            class="btn btn-sm btn-secondary me-2">DEVOLUÇÃO</a>
 
-                            {{-- <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
+                        {{-- <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-sm btn-danger active"
@@ -36,11 +49,13 @@
                                     EXCLUIR
                                 </button>
                             </form> --}}
-                        </div>
-                    </td>
+                    </div>
+                </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $usuarios->links() }}
+    <div class="bg-white px-2">
+        {{ $usuarios->links() }}
+    </div>
 @endsection

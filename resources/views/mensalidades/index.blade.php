@@ -1,17 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
-
-<div class="container-fluid">
-    <nav class="navbar">
-            <p></p>
-          <form action="{{ route('mensalidades.index') }}" method="GET" class="d-flex" role="search">
-            <input class="form-input me-2" type="search" name="search" aria-label="Search">
-            <button class="btn btn-outline-primary active" type="submit">Busca</button>
-          </form>
-        </div>
-      </nav>
-</div>
+    <div class="container-fluid">
+        <nav class="navbar">
+            <p class="h5 text-white"><a href="{{ route('mensalidades.index') }}">Sócios</a></p>
+            <form action="{{ route('mensalidades.index') }}" method="GET" class="d-flex" role="search">
+                <input class="form-input me-2" type="search" name="search" aria-label="Search">
+                <button class="btn btn-outline-primary active" type="submit">Busca</button>
+            </form>
+        </nav>
+    </div>
 
     <table class="table  table-striped">
         <thead>
@@ -26,12 +24,15 @@
                     <td>R$ {{ $socio->valor }} </td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{ route('mensalidades.show', $socio->id) }}" class="btn btn-sm btn-secondary">VER MENSALIDADES</a>
+                            <a href="{{ route('mensalidades.show', $socio->id) }}" class="btn btn-sm btn-secondary">VER
+                                MENSALIDADES</a>
                         </div>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $socios->links() }}
+    <div class="bg-white px-2">
+        {{ $socios->links() }}
+    </div>
 @endsection
