@@ -13,16 +13,16 @@
 
             <div class="row">
                 <div class="col-sm-7 mb-3 text-center">
-                    <label for="titulo">Título</label>
+                    <label for="titulo">*Título</label>
                     <input type="text" class="form-control" name="titulo" value="{{ old('titulo') }}" required>
                 </div>
 
                 <div class="form-outline col-sm-5 mb-3 text-center">
-                    <label>Editora</label>
-                    <select name="editora_id" class="form-control">
-                        <option selected>Selecione a Editora</option>
+                    <label>*Editora</label>
+                    <select class="form-control" name="editora_id" required>
+                        <option selected></option>
                         @foreach ($editoras as $editora)
-                            <option value="{{ $editora->id }}"> {{ $editora->nome }} </option>
+                            <option value="{{ $editora->id }}" @selected(old('editora_id') == $editora->id)> {{ $editora->nome }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -30,10 +30,10 @@
 
             <div class="row">
                 <div class="form-check col-sm-4 mb-3 text-center">
-                    <label>Autor(es) Encarnado</label>
+                    <label>*Autor(es) Encarnado</label>
                     <select name="autors[]" class="form-control" multiple>
                         @foreach ($autors1 as $autor)
-                            <option value="{{ $autor->id }}"> {{ $autor->nome }} </option>
+                            <option value="{{ $autor->id }}" @selected(collect(old('autors'))->contains($autor->id))> {{ $autor->nome }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -42,16 +42,16 @@
                     <label>Autor(es) Espiritual</label>
                     <select name="autors[]" class="form-control" multiple>
                         @foreach ($autors2 as $autor)
-                            <option value="{{ $autor->id }}"> {{ $autor->nome }} </option>
+                        <option value="{{ $autor->id }}" @selected(collect(old('autors'))->contains($autor->id))> {{ $autor->nome }} </option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-outline col-sm-4 mb-3 text-center">
-                    <label>Categoria(s)</label>
+                    <label>*Categoria(s)</label>
                     <select name="categorias[]" class="form-control" multiple>
                         @foreach ($categorias as $categoria)
-                            <option value="{{ $categoria->id }}"> {{ $categoria->nome }} </option>
+                            <option value="{{ $categoria->id }}" @selected(collect(old('categorias'))->contains($categoria->id))> {{ $categoria->nome }} </option>
                         @endforeach
                     </select>
                 </div>
@@ -62,4 +62,11 @@
             </div>
         </div>
     </form>
+
+    <select class="selectpicker" multiple data-actions-box="true">
+        <option>Mustard</option>
+        <option>Ketchup</option>
+        <option>Relish</option>
+      </select>
+
 @endsection

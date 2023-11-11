@@ -24,7 +24,7 @@
                                     <div class="mb-3 row">
                                         <label class="col-sm-6 col-form-label">Informe a data da Devolução</label>
                                         <div class="col-sm-6">
-                                            <input type="date" name="devolvido" class="form-control" required>
+                                            <input type="date" name="devolvido" class="form-control" required value='<?php echo date("Y-m-d"); ?>'>
                                         </div>
                                     </div>
 

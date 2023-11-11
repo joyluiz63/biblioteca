@@ -2,64 +2,27 @@
 
 @section('content')
     <div class="d-inline-flex bg-body-dark text-white">
-        <p class="h6"><a href="{{ route('mensalidades.index') }}">Sócios</a> ->Receber Mensalidades</p>
+        <p class="h6"><a href="{{ route('mensalidades.index') }}">Sócios</a> ->Atualizar Mensalidades</p>
     </div>
-
-    <form action="{{ route('receber_pagamento') }}" method="POST">
+    <form action="{{ route('mensalidades.update', $usuario->id) }}" method="POST">
         @csrf
+        @method('PUT')
 
-
-        <section class="vh-50 gradient-custom">
-            <div class="container">
-                <div class="row d-flex justify-content-center align-items-center">
-                    <div class="col-12 col-md-8 col-lg-6 col-xl-10">
-                        <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                            <div class="card-body text-center">
-                                <div class="mb-md-5 mt-md-4 pb-5">
-                                    <h2 class="fw-bold mb-4 text-uppercase">Usuário:
-                                        {{ $usuarios[0]->nome }}</h2>
-
-                                    <div class="mb-3 row">
-                                        <label class="col-sm-8 col-form-label">Informe a data do Pagamento</label>
-                                        <div class="col-sm-4">
-                                            <input type="date" name="pagamento" class="form-control" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3 row">
-                                        <table class="table table-striped">
-                                            <thead>
-
-                                                <th>Mês Referencia</th>
-                                                <th>Valor Acordado</th>
-                                                <th>Valor pago</th>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($usuarios as $key => $usuario)
-                                                    <tr>
-                                                        <input type="text" name="mensalidade[{{ $key }}][id]"
-                                                            value="{{ $usuario->mensalidade_id }}" hidden>
-                                                        <td>{{ $usuario->mes_referencia }} </td>
-                                                        <td>R$ {{ $usuario->valor }} </td>
-                                                        <td><input type="number" step="0.01" min="0.01"
-                                                                name="mensalidade[{{ $key }}][valor]"></td>
-                                                    </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-
-                                        <div class="flex justify-center">
-                                            <button class="btn btn-secondary active btn-lg px-5" type="submit">Registrar
-                                                Pagamento</button>
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="bg-light w-50 p-2 mt-6 container-fluid justify-center border border-dark">
+            <h1 class="h6 text-center">EDIÇÃO DE MENSALIDADE</h1>
+            <div class="col-sm-12 mb-3 text-center">
+                <label for="nome">Usuario</label>
+                <input type="text" class="form-control" name="nome" required value="{{ $usuario->nome }}">
             </div>
-        </section>
+
+            <div class="col-sm-12 mb-3 text-center">
+                <label for="valor">Mensalidade Valor</label>
+                <input type="text" class="form-control text-right" name="valor" required value="{{ $usuario->valor }}">
+            </div>
+
+            <div class="flex justify-center">
+                <button class="btn btn-secondary active px-5" type="submit">ATUALIZAR</button>
+            </div>
+        </div>
     </form>
 @endsection

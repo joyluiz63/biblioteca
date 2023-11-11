@@ -8,6 +8,8 @@ use App\Models\Editora;
 use App\Models\Livro;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
+use PhpParser\Node\Stmt\Else_;
 
 class LivroController extends Controller
 {
@@ -49,16 +51,21 @@ class LivroController extends Controller
     public function store(Request $request)
     {
         $data  = $request->all();
+        if( !$request['autors'] || !$request['categorias'] ) {
+            return Redirect::back()->withInput()
+                ->with('success', 'Todos os campos com * são de preenchimento obrigatório!');
+        } else {
+            $livro = $request->except(['autors', 'categorias']);
 
-        $livro = $request->except(['autors', 'categorias']);
 
-        $livro = Livro::create($livro);
-        $livro->categorias()->sync($data['categorias']);
-        $livro->autors()->sync($data['autors']);
+            $livro = Livro::create($livro);
+            $livro->categorias()->sync($data['categorias']);
+            $livro->autors()->sync($data['autors']);
+            $salvo = $livro->id;
 
-
-        return redirect()->route('livros.index')
-            ->with('success', 'Livro registrado com sucesso!');
+            return redirect()->route('livros.index')
+                ->with('success', 'Livro registrado com sucesso!');
+        }
 
     }
 
@@ -98,9 +105,9 @@ class LivroController extends Controller
 
         $livro = Livro::findOrFail($id);
 
-        $editoras = Editora::all(['id', 'nome']);
-        $autors = Autor::all(['id', 'nome']);
-        $categorias = Categoria::all(['id', 'nome']);
+        $editoras = Editora::orderby('nome')->get();
+        $autors = Autor::orderby('nome')->get();
+        $categorias = Categoria::orderby('nome')->get();
 
         return view("livros.edit", compact("livro", "editoras","autors", "categorias"));
     }
@@ -113,15 +120,19 @@ class LivroController extends Controller
     {
         $data = $request->all();
         // dd($data);
+        if( !$request['autors'] || !$request['categorias'] ) {
+            return Redirect::back()->withInput()
+                ->with('success', 'Todos os campos com * são de preenchimento obrigatório!');
+        } else {
+            $livro = Livro::findOrFail($livro);
+            $livro-> update($data);
 
-        $livro = Livro::findOrFail($livro);
-        $livro-> update($data);
+            $livro->categorias()->sync($data['categorias']);
+            $livro->autors()->sync($data['autors']);
 
-        $livro->categorias()->sync($data['categorias']);
-        $livro->autors()->sync($data['autors']);
-
-        return redirect()->route('livros.index')
-            ->with('success', 'Livro atualizado com sucesso!');
+            return redirect()->route('livros.index')
+                ->with('success', 'Livro atualizado com sucesso!');
+        }
     }
 
     /**
@@ -130,13 +141,15 @@ class LivroController extends Controller
     public function destroy(Livro $livro)
     {
         try {
+            $livro->autors()-> detach();
+            $livro->categorias()->detach();
             $livro->delete();
 
             return redirect()->route('livros.index')
             ->with('success', 'Livro excluido com sucesso!');
         } catch (\Exception $e) {
             return redirect()->route('livros.index')
-            ->with('success', 'O livro não pode ser excluido, pois pertence ao registro de emprestimos');
+            ->with('success', 'O livro não pode ser excluido, pois pertence ao registro de emprestimos ');
         }
     }
 }

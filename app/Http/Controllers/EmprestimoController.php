@@ -99,7 +99,6 @@ class EmprestimoController extends Controller
             return redirect()->route('emprestimos.index')
             ->with('success', 'Assinale o(s) livro(s) a serem devolvido!');
         }
-
     }
 
 }

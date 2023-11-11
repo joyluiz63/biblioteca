@@ -88,4 +88,5 @@
             </div>
         </div>
     </form>
+    <script src="{{ asset('assets/js/mask.js') }}"></script>
 @endsection

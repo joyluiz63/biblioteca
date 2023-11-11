@@ -56,7 +56,7 @@
             </div>
 
             <div class="flex justify-center">
-                <button class="btn btn-secondary active px-5" type="submit">CADASTRAR</button>
+                <button class="btn btn-secondary active px-5" type="submit">ATUALIZAR</button>
             </div>
         </div>
     </form>

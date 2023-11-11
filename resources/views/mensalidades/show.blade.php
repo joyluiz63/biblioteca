@@ -25,7 +25,7 @@
                     </td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{ route('mensalidades.edit', $usuario->usuario_id) }}" class="btn btn-sm btn-secondary me-2">RECEBER</a>
+                            <a href="{{ route('pagamentos.edit', $usuario->usuario_id) }}" class="btn btn-sm btn-secondary me-2">RECEBER</a>
                         </div>
                         @endif</td>
                     </td>

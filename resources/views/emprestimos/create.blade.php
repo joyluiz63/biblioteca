@@ -21,8 +21,8 @@
 
                                     <div class="form-outline form-white mb-4">
                                         <label>Usuario</label>
-                                        <select name="usuario_id" class="form-control" required="required">
-                                            <option selected>Selecione o Usuário</option>
+                                        <select name="usuario_id" class="form-control" required>
+                                            <option selected></option>
                                             @foreach ($usuarios as $usuario)
                                                 <option value="{{ $usuario->id }}"> {{ $usuario->nome }} </option>
                                             @endforeach
@@ -33,22 +33,27 @@
                                         <label>Livro(s)</label>
                                         <select name="livros[]" class="form-control" multiple>
                                             @foreach ($livros as $livro)
-                                                <option value="{{ $livro->id }}"> {{ $livro->titulo }}
+                                                <option value="{{ $livro->id }}" @selected(collect(old('livros'))->contains($livro->id))>
+                                                    {{ $livro->titulo }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="date" name="retirada" required class="form-control"
-                                            value="{{ old('retirada') }}">
-                                        <label class="form-label">Data da Retirada:</label>
-                                    </div>
+                                    <div class="row">
+                                        <div class="form-outline form-white mb-4 col-sm-4">
+                                        </div>
+                                        <div class="form-outline form-white mb-4 col-sm-4">
+                                            <input type="date" name="retirada" required class="form-control"
+                                                value='<?php echo date('Y-m-d'); ?>'>
+                                            <label class="form-label">Data da Retirada:</label>
+                                        </div>
 
-                                    <div class="form-outline form-white mb-4">
-                                        <input type="date" name="devolvera" required class="form-control"
-                                            value="{{ old('devolvera') }}">
-                                        <label class="form-label">Data da Devolução:</label>
+                                        <div class="form-outline form-white mb-4 col-sm-4">
+                                            <input type="date" name="devolvera" required class="form-control"
+                                                value="{{ old('devolvera') }}">
+                                            <label class="form-label">Data da Devolução:</label>
+                                        </div>
                                     </div>
 
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit">Cadastrar</button>

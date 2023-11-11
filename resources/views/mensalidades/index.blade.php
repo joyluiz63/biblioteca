@@ -24,8 +24,8 @@
                     <td>R$ {{ $socio->valor }} </td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{ route('mensalidades.show', $socio->id) }}" class="btn btn-sm btn-secondary">VER
-                                MENSALIDADES</a>
+                            <a href="{{ route('mensalidades.show', $socio->id) }}" class="btn btn-sm btn-primary me-2">VER MENSALIDADES</a>
+                            <a href="{{ route('mensalidades.edit', $socio->id) }}" class="btn btn-sm btn-primary">EDITAR VALOR</a>
                         </div>
                     </td>
                 </tr>
