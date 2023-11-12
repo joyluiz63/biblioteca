@@ -8,65 +8,67 @@
     <form action="{{ route('livros.store') }}" method="POST">
         @csrf
 
-        <div class="bg-light w-60 p-2 mt-2 container-fluid justify-center border border-dark">
+        <div class="bg-light p-2 mt-2 col-sm-8 container-fluid justify-center border border-dark">
             <h1 class="h6 text-center">CADASTRO DE LIVRO</h1>
 
             <div class="row">
-                <div class="col-sm-7 mb-3 text-center">
-                    <label for="titulo">*Título</label>
+                <div class="col-sm-12 mb-3 text-center">
+                    <label for="titulo">*Título do Livro</label>
                     <input type="text" class="form-control" name="titulo" value="{{ old('titulo') }}" required>
                 </div>
-
+            </div>
+            <div class="row">
                 <div class="form-outline col-sm-5 mb-3 text-center">
                     <label>*Editora</label>
-                    <select class="form-control" name="editora_id" required>
+                    <select name="editora_id" class="selectpicker" data-width="100%"
+                        data-title="Nada selecionado">
                         <option selected></option>
                         @foreach ($editoras as $editora)
-                            <option value="{{ $editora->id }}" @selected(old('editora_id') == $editora->id)> {{ $editora->nome }} </option>
+                            <option class="bg-secondar" value="{{ $editora->id }}"
+                                @selected(old('editora_id') == $editora->id)> {{ $editora->nome }} </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-outline col-sm-7 mb-3 text-center">
+                    <p>*Categoria(s)</p>
+                    <select name="categorias[]" class="selectpicker" data-width="100%"
+                        multiple data-title="Nada selecionado">
+                        @foreach ($categorias as $categoria)
+                            <option class="bg-secondary" value="{{ $categoria->id }}"
+                                @selected(collect(old('categorias'))->contains($categoria->id))> {{ $categoria->nome }} </option>
                         @endforeach
                     </select>
                 </div>
             </div>
 
             <div class="row">
-                <div class="form-check col-sm-4 mb-3 text-center">
-                    <label>*Autor(es) Encarnado</label>
-                    <select name="autors[]" class="form-control" multiple>
+                <div class="form-check col-sm-6 mb-3 text-center">
+                    <p>*Autor(es) Encarnado</p>
+                    <select name="autors[]" class="selectpicker" data-width="100%"
+                        multiple data-title="Nada selecionado">
                         @foreach ($autors1 as $autor)
-                            <option value="{{ $autor->id }}" @selected(collect(old('autors'))->contains($autor->id))> {{ $autor->nome }} </option>
+                            <option class="bg-secondary" value="{{ $autor->id }}"
+                                @selected(collect(old('autors'))->contains($autor->id))> {{ $autor->nome }} </option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="form-outline col-sm-4 mb-3 text-center">
-                    <label>Autor(es) Espiritual</label>
-                    <select name="autors[]" class="form-control" multiple>
+                <div class="form-outline col-sm-6 mb-3 text-center">
+                    <p>Autor(es) Espiritual</p>
+                    <select name="autors[]" class="selectpicker"
+                        data-width="100%" multiple data-title="Nada selecionado">
                         @foreach ($autors2 as $autor)
-                        <option value="{{ $autor->id }}" @selected(collect(old('autors'))->contains($autor->id))> {{ $autor->nome }} </option>
+                            <option class="bg-secondary" value="{{ $autor->id }}"
+                                @selected(collect(old('autors'))->contains($autor->id))> {{ $autor->nome }} </option>
                         @endforeach
                     </select>
                 </div>
 
-                <div class="form-outline col-sm-4 mb-3 text-center">
-                    <label>*Categoria(s)</label>
-                    <select name="categorias[]" class="form-control" multiple>
-                        @foreach ($categorias as $categoria)
-                            <option value="{{ $categoria->id }}" @selected(collect(old('categorias'))->contains($categoria->id))> {{ $categoria->nome }} </option>
-                        @endforeach
-                    </select>
-                </div>
             </div>
 
             <div class="flex justify-center">
-                <button class="btn btn-secondary active px-5" type="submit">CADASTRAR</button>
+                <button class="btn btn-primary active px-5" type="submit">CADASTRAR</button>
             </div>
         </div>
     </form>
-
-    <select class="selectpicker" multiple data-actions-box="true">
-        <option>Mustard</option>
-        <option>Ketchup</option>
-        <option>Relish</option>
-      </select>
-
 @endsection

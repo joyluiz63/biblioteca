@@ -20,10 +20,10 @@
                 </div>
 
                 <div class="form-outline col-sm-5 mb-3 text-center">
-                    <label>Editora</label>
-                    <select name="editora_id" class="form-control">
+                    <p>Editora</p>
+                    <select name="editora_id" class="selectpicker">
                         @foreach ($editoras as $editora)
-                            <option value="{{ $editora->id }}"
+                        <option class="bg-secondary" value="{{ $editora->id }}"
                                 {{ $editora->id == old('editora_id', $livro->editora_id) ? 'selected' : '' }}>
                                 {{ $editora->nome }}</option>
                         @endforeach
@@ -34,9 +34,9 @@
             <div class="row">
                 <div class="form-outline col-sm-6 mb-3 text-center">
                     <label>Autor(es)</label>
-                    <select name="autors[]" class="form-control" multiple>
+                    <select name="autors[]" class="selectpicker"  data-width="100%" multiple>
                         @foreach ($autors as $autor)
-                            <option value="{{ $autor->id }}" @if ($livro->autors->contains($autor)) selected @endif>
+                        <option class="bg-secondary" value="{{ $autor->id }}" @if ($livro->autors->contains($autor)) selected @endif>
                                 {{ $autor->nome }}
                             </option>
                         @endforeach
@@ -45,9 +45,9 @@
 
                 <div class="form-outline col-sm-6 mb-3 text-center">
                     <label>Categoria(s)</label>
-                    <select name="categorias[]" class="form-control" multiple>
+                    <select name="categorias[]" class="selectpicker" data-width="100%" multiple>
                         @foreach ($categorias as $c)
-                            <option value="{{ $c->id }}" @if ($livro->categorias->contains($c)) selected @endif>
+                            <option class="bg-secondary" value="{{ $c->id }}" @if ($livro->categorias->contains($c)) selected @endif>
                                 {{ $c->nome }}
                             </option>
                         @endforeach
@@ -56,7 +56,7 @@
             </div>
 
             <div class="flex justify-center">
-                <button class="btn btn-secondary active px-5" type="submit">ATUALIZAR</button>
+                <button class="btn btn-primary active px-5" type="submit">ATUALIZAR</button>
             </div>
         </div>
     </form>

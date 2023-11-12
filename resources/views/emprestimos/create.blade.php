@@ -31,9 +31,9 @@
 
                                     <div class="form-outline form-white mb-4">
                                         <label>Livro(s)</label>
-                                        <select name="livros[]" class="form-control" multiple>
+                                        <select name="livros[]" class="selectpicker bg-white"  data-width="100%" multiple>
                                             @foreach ($livros as $livro)
-                                                <option value="{{ $livro->id }}" @selected(collect(old('livros'))->contains($livro->id))>
+                                                <option class="bg-secondary" value="{{ $livro->id }}" @selected(collect(old('livros'))->contains($livro->id))>
                                                     {{ $livro->titulo }}
                                                 </option>
                                             @endforeach
