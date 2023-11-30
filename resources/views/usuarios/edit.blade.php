@@ -10,7 +10,7 @@
         @csrf
 
         <div class="bg-light p-2 mt-6 container-fluid justify-center border border-dark">
-            <h1 class="text-center">CADASTRO DE USUARIOS/SÓCIOS</h1>
+            <h1 class="text-center">EDIÇÃO DE USUARIOS/SÓCIOS</h1>
             <div class="row">
                 <div class="col-sm-7 mb-3 text-center">
                     <label for="nome">*Nome</label>
@@ -69,7 +69,7 @@
                 <div class="col-sm-6 mb-3 text-center">
                     <label for="fone">Telefone(s)</label>
                     <input type="text" class="form-control" id="fone" name="fone"
-                        value="{{ isset($usuario->fone) ? $usuario->nome : old('fone') }}">
+                        value="{{ isset($usuario->fone) ? $usuario->fone : old('fone') }}">
                 </div>
 
                 <div class="col-sm-6 mb-4 text-center">

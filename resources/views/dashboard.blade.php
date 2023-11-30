@@ -4,9 +4,7 @@
 <div class="d-inline-flex p-2 bg-body-dark text-white">
     <p class="h6"><a href="{{ route('dashboard') }}">Home</a></p>
 </div>
-    <div class="fluid bg-light">
-
-
+    <div class="col-sm-7 bg-light" style="float:none;margin:auto;">
         <div class="font-semibold text-xl ">
             <h1 class="text-center">"Nascer, morrer, renascer ainda e progredir sempre, tal é a lei"</h1>
             <p class="text-center">Allan Kardec</p>

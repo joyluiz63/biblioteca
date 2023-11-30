@@ -8,17 +8,18 @@
     <form action="{{ route('livros.store') }}" method="POST">
         @csrf
 
-        <div class="bg-light p-2 mt-2 col-sm-8 container-fluid justify-center border border-dark">
+        <div class="bg-light p-2 mt-2 col-sm-10 container-fluid justify-center border border-dark">
             <h1 class="h6 text-center">CADASTRO DE LIVRO</h1>
 
             <div class="row">
-                <div class="col-sm-12 mb-3 text-center">
+                <div class="col-sm-12 mb-3 px-4 text-center">
                     <label for="titulo">*Título do Livro</label>
                     <input type="text" class="form-control" name="titulo" value="{{ old('titulo') }}" required>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-outline col-sm-5 mb-3 text-center">
+
+            <div class="row gap-4 px-4 mx-4">
+                <div class="form-outline col-sm-5 mb-3 text-center border border-dark">
                     <label>*Editora</label>
                     <select name="editora_id" class="selectpicker" data-width="100%"
                         data-title="Nada selecionado">
@@ -29,7 +30,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-outline col-sm-7 mb-3 text-center">
+                <div class="form-outline col-sm-6 mb-3 text-center border border-dark">
                     <p>*Categoria(s)</p>
                     <select name="categorias[]" class="selectpicker" data-width="100%"
                         multiple data-title="Nada selecionado">
@@ -41,8 +42,8 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-check col-sm-6 mb-3 text-center">
+            <div class="row gap-4 px-4 mx-4">
+                <div class="form-check col-sm-6 mb-3 text-center border border-dark">
                     <p>*Autor(es) Encarnado</p>
                     <select name="autors[]" class="selectpicker" data-width="100%"
                         multiple data-title="Nada selecionado">
@@ -53,7 +54,7 @@
                     </select>
                 </div>
 
-                <div class="form-outline col-sm-6 mb-3 text-center">
+                <div class="form-outline col-sm-5 mb-3 text-center border border-dark">
                     <p>Autor(es) Espiritual</p>
                     <select name="autors[]" class="selectpicker"
                         data-width="100%" multiple data-title="Nada selecionado">

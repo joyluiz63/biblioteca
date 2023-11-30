@@ -12,14 +12,14 @@
         <div class="bg-light w-60 p-2 mt-2 container-fluid justify-center border border-dark">
             <h1 class="h6 text-center">EDIÇÃO DE LIVRO</h1>
 
-            <div class="row">
-                <div class="col-sm-7 mb-3 text-center">
+            <div class="row gap-4 px-4">
+                <div class="col-sm-6 mb-3 text-center">
                     <label for="titulo">Título</label>
                     <input type="text" class="form-control" name="titulo"
                         value="{{ isset($livro->titulo) ? $livro->titulo : old('titulo') }}" required>
                 </div>
 
-                <div class="form-outline col-sm-5 mb-3 text-center">
+                <div class="form-outline col-sm-5 mb-3 text-center border border-dark">
                     <p>Editora</p>
                     <select name="editora_id" class="selectpicker">
                         @foreach ($editoras as $editora)
@@ -31,8 +31,8 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-outline col-sm-6 mb-3 text-center">
+            <div class="row gap-4 px-4">
+                <div class="form-outline col-sm-6 mb-3 text-center border border-dark">
                     <label>Autor(es)</label>
                     <select name="autors[]" class="selectpicker"  data-width="100%" multiple>
                         @foreach ($autors as $autor)
@@ -43,7 +43,7 @@
                     </select>
                 </div>
 
-                <div class="form-outline col-sm-6 mb-3 text-center">
+                <div class="form-outline col-sm-5 mb-3 text-center border border-dark">
                     <label>Categoria(s)</label>
                     <select name="categorias[]" class="selectpicker" data-width="100%" multiple>
                         @foreach ($categorias as $c)
